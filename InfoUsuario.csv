@@ -1,2 +1,4 @@
-"username;tipoPlan;nombre;apellido;dpi;correo;contrasenia"						
-nico	Base	nicolas	concua	36085474	nic@gmail.com	12345678
+username;contrasenia;nombre;apellido;correo;dpi
+﻿username;contrasenia;nombre;apellido;correo;dpi
+nico;827ccb0eea8a706c4c34a16891f84e7b;nicolas;concua;jjdjd@gmail.com;23563552
+fer;123;Fernando;Ruedas;ruedas@gmail.com;528471260101

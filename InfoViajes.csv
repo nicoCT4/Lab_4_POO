@@ -1,1 +1,4 @@
-"username;fechaConfirmacion;tipoViaje;cantidadBoletos;aerolinea;Tarjeta;cuotas;claseVuelo"
+username;contrasenia;tipoPlan;nombre;apellido;dpi;correo;numeroTarjeta;cantidadCuotas;claseVuelo;numeroAsiento;cantidadMaletas
+﻿username;contrasenia;base;nombre;apellido;dpi;correo;;0;;0;0
+nico;827ccb0eea8a706c4c34a16891f84e7b;base;nicolas;concua;23563552;jjdjd@gmail.com;;0;;0;0
+fer;25d55ad283aa400af464c76d713c07ad;base;Fernando;Ruedas;528471260101;ruedas@gmail.com;;0;;0;0

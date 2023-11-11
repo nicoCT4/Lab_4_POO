@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Cliente implements UsuarioBase {
     private String numeroTarjeta;
     private int cantidadCuotas;
@@ -11,6 +13,17 @@ public class Cliente implements UsuarioBase {
     private String apellido;
     private String dpi;
     private String correo;
+    private double precioVuelo;
+
+    // Nuevas variables
+    private String fechaReserva;
+    private String tipoViajeReserva;
+    private int cantidadBoletosReserva;
+    private String aerolineaReserva;
+
+    private String numeroTarjetaConfirmacion;
+    private int cuotasConfirmacion;
+    private String claseVueloConfirmacion;
 
     // Constructor
     public Cliente(String username, String contrasenia, String tipoPlan, String nombre, String apellido, String dpi, String correo,
@@ -23,13 +36,20 @@ public class Cliente implements UsuarioBase {
         this.cantidadMaletas = cantidadMaletas;
         this.username = username;
         this.contrasenia = contrasenia;
-        this.tipoPlan = tipoPlan;
+        this.tipoPlan = "base";
         this.nombre = nombre;
         this.apellido = apellido;
         this.dpi = dpi;
-        this.correo = correo;
-
+        this.correo = correo; 
         
+        // Inicializar las nuevas variables
+        this.fechaReserva = "";
+        this.tipoViajeReserva = "";
+        this.cantidadBoletosReserva = 0;
+        this.aerolineaReserva = "";
+        this.numeroTarjetaConfirmacion = "";
+        this.cuotasConfirmacion = 0;
+        this.claseVueloConfirmacion = "";
     }
 
     // Getters y setters de usuario
@@ -90,6 +110,9 @@ public class Cliente implements UsuarioBase {
         this.correo = correo;
     }
     // Getters y setters de cliente
+    public double getPrecioVuelo() {
+        return precioVuelo;
+    }
     public String getNumeroTarjeta() {
         return numeroTarjeta;
     }
@@ -133,30 +156,68 @@ public class Cliente implements UsuarioBase {
     // Métodos de la interfaz
     @Override
     public void cambiarTipoCliente(String nuevoTipo) {
-        this.tipoPlan = nuevoTipo;
+        if ("premium".equalsIgnoreCase(nuevoTipo)) {
+            this.tipoPlan = "premium";
+            System.out.println("Cambiado a tipo de cliente: Premium");
+        } else {
+            System.out.println("Tipo de cliente no reconocido: " + nuevoTipo);
+        }
     }
+    
     @Override
     public void aplicarDescuento(double porcentajeDescuento) {
-        // TODO Auto-generated method stub
+        // Verificar que el porcentaje de descuento sea válido (por ejemplo, entre 0 y 100)
+        if (porcentajeDescuento >= 0 && porcentajeDescuento <= 100) {
+            // Calcular el nuevo precio aplicando el descuento
+            double factorDescuento = porcentajeDescuento / 100.0;
+            double nuevoPrecio = precioVuelo - (precioVuelo * factorDescuento);
+
+            // Asignar el nuevo precio
+            this.precioVuelo = nuevoPrecio;
+
+            System.out.println("Descuento aplicado. Nuevo precio del vuelo: " + nuevoPrecio);
+        } else {
+            System.out.println("Porcentaje de descuento no válido.");
+        }
     }
 
     @Override
     public void cambiarContraseña() {
-        // TODO Auto-generated method stub
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la nueva contraseña: ");
+        String nuevaContrasenia = scanner.nextLine();
+        this.setContrasenia(nuevaContrasenia);
+        System.out.println("Contraseña cambiada exitosamente.");
+
     }
 
     @Override
     public void hacerReserva(String fecha, String tipoViaje, int cantidadBoletos, String aerolinea) {
-        // TODO Auto-generated method stub
+        this.fechaReserva = fecha;
+        this.tipoViajeReserva = tipoViaje;
+        this.cantidadBoletosReserva = cantidadBoletos;
+        this.aerolineaReserva = aerolinea;
+        System.out.println("Reserva realizada exitosamente.");
     }
-
+    
     @Override
     public void hacerConfirmacion(String numeroTarjeta, int cuotas, String claseVuelo) {
-        // TODO Auto-generated method stub
+        this.numeroTarjetaConfirmacion = numeroTarjeta;
+        this.cuotasConfirmacion = cuotas;
+        this.claseVueloConfirmacion = claseVuelo;
+        System.out.println("Confirmación realizada exitosamente.");
     }
-
+    
     @Override
     public void imprimirItinerario() {
-        // TODO Auto-generated method stub
-    }
+        System.out.println("----- Itinerario -----");
+        System.out.println("Fecha de Reserva: " + fechaReserva);
+        System.out.println("Tipo de Viaje: " + tipoViajeReserva);
+        System.out.println("Cantidad de Boletos: " + cantidadBoletosReserva);
+        System.out.println("Aerolínea: " + aerolineaReserva);
+        System.out.println("Número de Tarjeta para Confirmación: " + numeroTarjetaConfirmacion);
+        System.out.println("Cuotas para Confirmación: " + cuotasConfirmacion);
+        System.out.println("Clase de Vuelo para Confirmación: " + claseVueloConfirmacion);
+        System.out.println("-----------------------");
+}
 }
